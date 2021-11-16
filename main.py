@@ -1,6 +1,7 @@
 from pandas import read_csv
 from matplotlib import pyplot
 from pandas.plotting import scatter_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -49,3 +50,15 @@ for name,model in models:
 pyplot.boxplot(results,labels = names)
 pyplot.title("Algorithm Comparation")
 pyplot.show()
+model = SVC(gamma="auto")
+model.fit(X_train,Y_train)
+predictions=model.predict(X_validation)
+print(accuracy_score(Y_validation, predictions))
+print(confusion_matrix(Y_validation,predictions))
+print(classification_report(Y_validation,predictions))
+model2=LogisticRegression(solver = "liblinear", multi_class="ovr")
+model2.fit(X_train,Y_train)
+predictions2=model2.predict(X_validation)
+print(accuracy_score(Y_validation, predictions2))
+print(confusion_matrix(Y_validation,predictions2))
+print(classification_report(Y_validation,predictions2))
